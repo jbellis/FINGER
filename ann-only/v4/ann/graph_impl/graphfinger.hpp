@@ -212,12 +212,19 @@
           float real_mean, appx_mean, real_std, appx_std;
           std::vector<dist_t > appx_ip;
           // Setup finger projection matrix
-	  finger.projection_matrix.resize(low_rank * dimension, 0);
+    	  finger.projection_matrix.resize(low_rank * dimension, 0);
           for(int i = 0; i < low_rank; i++){
               for(int j = 0; j < dimension; j++){
                   finger.projection_matrix[i * dimension + j] = V(j,i);
               }
-          } 
+          }
+          // Print projection matrix
+          for(int i = 0; i < finger.low_rank; i++) {
+              for(int j = 0; j < finger.dimension; j++) {
+                  std::cout << finger.projection_matrix[i*finger.dimension + j] << " ";
+              }
+              std::cout << std::endl;
+          }
 
           // Low-dimensional center learning
           finger.low_rank = low_rank; 
